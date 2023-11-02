@@ -16,9 +16,6 @@
 #include <avr/io.h> /* To use the SREG register */
 
 
-
-extern uint8 g_edgeCount;  /* To use the same variable in another file */
-
 void main(void)
 {
 	uint16 distance = 0;
