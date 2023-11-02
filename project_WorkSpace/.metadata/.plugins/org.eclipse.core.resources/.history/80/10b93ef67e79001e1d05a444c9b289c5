@@ -1,0 +1,51 @@
+/******************************************************************************
+ *
+ * Module: application
+ *
+ * File Name: main.c
+ *
+ * Description: Developing a system that measure the distance and display it on LCD.
+ *
+ * Author: Bilal Mohamed
+ *
+ *******************************************************************************/
+
+
+#include "../HAL/ultrasonic.h"
+#include "../HAL/lcd.h"
+#include <avr/io.h> /* To use the SREG register */
+
+
+extern uint8 g_edgeCount;  /* To use the same variable in another file */
+
+void main(void)
+{
+	uint16 Distance = 0;
+
+	//Initialize the Ultrasonic driver
+	Ultrasonic_init();
+
+	/* Enable Global Interrupt I-Bit */
+	SREG |= (1<<7);
+
+	//Initialize the LCD driver
+	LCD_init();
+
+	LCD_displayString("Distance =   Cm");
+
+	while(1)
+	{
+		if(g_edgeCount == 4)
+		{
+			Icu_DeInit(); /* Disable ICU Driver */
+			g_edgeCount = 0; /* reset the counting */
+			LCD_moveCursor(0, 10);
+			/* get the calculated distance */
+			Distance = Ultrasonic_readDistance();
+
+			/* display the distance on LCD screen */
+			LCD_intgerToString(Distance);
+			LCD_displayString("cm");
+		}
+	}
+}

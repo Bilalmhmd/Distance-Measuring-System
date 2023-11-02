@@ -1,0 +1,35 @@
+/******************************************************************************
+ *
+ * Module: Ultrasonic
+ *
+ * File Name: ultrasonic.c
+ *
+ * Description: Source file for the Ultrasonic driver
+ *
+ * Author: Bilal Mohamed
+ *
+ *******************************************************************************/
+
+#include "../MCAL/icu.h"
+#include "../MCAL/gpio.h"
+
+
+/*******************************************************************************
+ *                      Functions Definitions                                  *
+ *******************************************************************************/
+
+/*
+ * Description :
+ * Initialize the Ultrasonic driver:
+ * Initialize the ICU driver
+ * Setup the ICU call back function
+ * Setup the direction for the trigger pin as output pin through the GPIO driver
+ */
+
+
+void Ultrasonic_init(void)
+{
+	//initialize the ICU driver
+	Icu_ConfigType icu_config = {F_CPU_8,RISING};
+
+}

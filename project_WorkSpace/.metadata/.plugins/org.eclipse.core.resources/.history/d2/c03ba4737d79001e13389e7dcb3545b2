@@ -1,0 +1,36 @@
+/******************************************************************************
+ *
+ * Module: application
+ *
+ * File Name: main.c
+ *
+ * Description: Developing a system that measure the distance and display it on LCD.
+ *
+ * Author: Bilal Mohamed
+ *
+ *******************************************************************************/
+
+
+#include "../HAL/ultrasonic.h"
+#include "../HAL/lcd.h"
+
+
+
+void main(void)
+{
+	uint16 Distance = 0;
+
+	//Initialize the Ultrasonic driver
+	Ultrasonic_init();
+
+	//Initialize the LCD driver
+	LCD_init();
+
+	LCD_displayString("Distance =   Cm");
+	Distance = Ultrasonic_readDistance();
+	while(1)
+	{
+		LCD_moveCursor(0, 10);
+		LCD_intgerToString(Distance);
+	}
+}
